@@ -1,14 +1,12 @@
 package com.example.registrationForm.Controller;
 
+import com.example.registrationForm.DTO.UserDTO;
 import com.example.registrationForm.Entity.User;
 import com.example.registrationForm.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -41,5 +39,24 @@ public class RegistrationController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Registration failed");
         }
     }
+
+    @GetMapping("/getUser/{mobileNumber}")
+    public ResponseEntity<?> getUserByMobileNumber(@RequestParam Long mobileNumber) {
+        try {
+            // Retrieve user by mobile number
+            Optional<User> userData = userRepository.findUserByMobileNumber(mobileNumber);
+
+            // Check if the user exists
+            if (userData.isPresent()) {
+                return ResponseEntity.ok(userData.get());
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error retrieving user");
+        }
+    }
+
 }
 

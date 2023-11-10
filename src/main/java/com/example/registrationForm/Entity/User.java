@@ -27,7 +27,6 @@ public class User {
     private Long mobileNumber;
 
 
-
-
-
+    public User(Integer id, String userName, String password) {
+    }
 }

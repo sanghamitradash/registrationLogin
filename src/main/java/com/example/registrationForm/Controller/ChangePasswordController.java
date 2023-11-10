@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/changepassword")
-public class ChangePassword {
+public class ChangePasswordController {
     @Autowired
     private UserRepository userRepository;
 

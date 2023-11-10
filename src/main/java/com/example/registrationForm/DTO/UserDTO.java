@@ -21,4 +21,7 @@ public class UserDTO {
     private String oldPassword;
     private String newPassword;
     private String confirmPassword;
+
+    public UserDTO(Integer id, String userName, String password) {
+    }
 }
